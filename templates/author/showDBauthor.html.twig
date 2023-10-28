@@ -1,0 +1,30 @@
+{{form_start(f)}}
+{{form_label(f.min)}}
+{{form_widget(f.min)}}
+{{form_label(f.max)}}
+{{form_widget(f.max)}}
+{{form_end(f)}}
+
+<table border="2">
+    <tr>
+        <td>ID</td>
+        <td>UserName</td>
+        <td>Email</td>
+        <td>Number Of Books</td>
+        <td>Edit</td>
+        <td>Delete</td>
+    </tr>
+    {%for authord in author %}
+    <tr>
+        <td>{{authord.id}}</td>
+        <td>{{authord.username|upper}}</td>
+        <td>{{authord.email}}</td>
+        <td>{{authord.nbbooks}}</td>
+        <td><a href="{{path('editDBauthor',{'id': authord.id})}}">Update</a></td>  
+        <td><a href="{{path('REMOVEDBauthor',{'id': authord.id})}}">Romove</a></td>
+       {#<td><a href="{{path('showidauthor',{'id': authord.id})}}">show</a></td>  #} 
+        
+    </tr>
+    {%endfor%}
+</table>
+Delete Authors With 0 Books: <a href="{{ path('RomoveAuthorsAvecZeroBooks') }}">Delete</a>

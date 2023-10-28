@@ -1,0 +1,8 @@
+Title : {{book.Title}} <br>
+Reference :{{book.ref}}<br>
+Category :{{book.Category}}<br>
+Publication Date :{{book.PublicationDate|date()}}<br>
+Author :{{book.author.username}}<br>
+The number of books by the author :{{book.author.nbbooks}} <br>
+<a href="{{path('showDBBook')}}">back to list</a>
+<a href="{{path('editDBbook',{'ref': book.ref})}}">edit</a>

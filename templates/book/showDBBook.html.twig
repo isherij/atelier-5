@@ -1,0 +1,62 @@
+{{form_start(f)}}
+
+{{form_label(f.ref)}}
+{{form_widget(f.ref)}}
+
+{{form_end(f)}}
+
+{%if book is not empty %}
+{%set tt_published_books=0 %}
+
+
+<table border="2">
+    <tr>
+        <td>ref</td>
+        <td>Author</td>
+        <td>Title</td>
+        <td>Publication Date</td>
+        <td>Category</td>
+        <td>Published</td>
+        <td>Author Number Of Books</td>
+        <td>Actions</td>
+        
+    </tr>
+    
+    {%for bookd in book %}
+    <tr>
+        <td>{{bookd.ref}}</td>
+        <td>{{bookd.Author.username}}</td>
+        <td>{{bookd.Title}}</td>
+        <td>{{bookd.PublicationDate|date()}}</td>
+          <td>{{bookd.Category}}</td>
+          <td>
+                {% if bookd.Published %}
+                    {{ bookd.Published }}
+                {% else %}
+                    0
+                {% endif %}
+
+                {% if bookd.Published == 1 %}
+                {% set tt_published_books = tt_published_books + 1 %}
+                {% endif %}
+                
+            </td>
+            <td>{{bookd.Author.nbbooks}}</td>
+        <td><a href="{{path('editDBbook',{'ref': bookd.ref})}}">Edit</a>
+        <a href="{{path('RemoveDBbook',{'ref': bookd.ref})}}">Delete</a>
+        <a href="{{path('Detailsbook',{'ref': bookd.ref})}}">Show</a></td>
+       
+        
+    </tr>
+    {%endfor%}
+   
+</table>
+Number Of Published Books: {{tt_published_books}} <br>
+Number Of UnPublished Books: {{tt_unpublished_books}} <br>
+The number of books in Science Fiction category is : {{TotalNumberOfScienceFictionBooks}} <br>
+{%else%}
+Pas de Livres
+{%endif%} <br>
+<a href="{{path('addDBbook')}}">
+    <button>Create New</button>
+</a>
